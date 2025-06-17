@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { format } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
 import { Button } from "@/components/ui/button"
+import { useCrearReserva } from '@/hooks/useCrearReserva'
 
 import {
   Card,
@@ -20,12 +21,20 @@ import {
 } from "@/components/ui/dialog"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { addDays, isBefore, isAfter, startOfDay } from 'date-fns'
+import { es } from 'date-fns/locale'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function HorariosView() {
   const { pistaId } = useParams<{ pistaId: string }>()
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [horaSeleccionada, setHoraSeleccionada] = useState<string | null>(null)
+  const [horarioIdSeleccionado, setHorarioIdSeleccionado] = useState<string | null>(null)
   const [open, setOpen] = useState(false)  
+
+  const { user } = useAuth() // user?.uid es el usuarioId
+  const usuarioId = user?.uid
+
+  const { reservar, loading: loadingReserva } = useCrearReserva()
 
 
   const fechaFormateada = selectedDate
@@ -42,7 +51,6 @@ export default function HorariosView() {
   const handleConfirmar = () => {
     if (!selectedDate || !horaSeleccionada) return
     setOpen(true)
-    // Aquí puedes hacer la petición a tu backend o Firestore para guardar la reserva
   }
 
   return (
@@ -57,6 +65,7 @@ export default function HorariosView() {
           <Calendar
             mode="single"
             selected={selectedDate}
+            locale={es}
             onSelect={setSelectedDate}
             className="rounded-md border shadow"
             disabled={(date) => {
@@ -84,7 +93,11 @@ export default function HorariosView() {
                       : "cursor-pointer hover:shadow-md"
                   }`}
                   onClick={() => {
-                    if (disponible) setHoraSeleccionada(hora);
+                    if (disponible) {
+                      setHoraSeleccionada(hora);
+                      setHorarioIdSeleccionado(id);
+                      setOpen(true);
+                    }
                   }}
                 >
                   <CardHeader>
@@ -129,17 +142,32 @@ export default function HorariosView() {
           </p>
           <DialogFooter>
             <Button
-              onClick={() => {
-                // Aquí podrías guardar en Firestore
-                console.log(
-                  "Reserva confirmada:",
-                  fechaFormateada,
-                  horaSeleccionada
-                );
-                setOpen(false);
+              onClick={async () => {
+                if (
+                  !selectedDate ||
+                  !horaSeleccionada ||
+                  !horarioIdSeleccionado
+                )
+                  return;
+
+                try {
+                  await reservar({
+                    pistaId: pistaId!,
+                    usuarioId: usuarioId!,
+                    fecha: fechaFormateada,
+                    horarioId: horarioIdSeleccionado,
+                  });
+
+                  setOpen(false);
+                  setHoraSeleccionada(null);
+                  alert("Reserva creada correctamente ✅");
+                } catch (err) {
+                  alert("Error al crear la reserva ❌");
+                }
               }}
+              disabled={loadingReserva}
             >
-              Sí, confirmar
+              {loadingReserva ? "Reservando..." : "Sí, confirmar"}
             </Button>
             <Button variant="outline" onClick={() => setOpen(false)}>
               Cancelar
