@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # frontend-reservas-padel
 UI de la aplicación de reservas de padel.
 =======
+=======
+>>>>>>> 3a1c4f5cbc543359b3750dab8f06b0baeb72c17c
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -56,4 +59,7 @@ export default tseslint.config({
   },
 })
 ```
+<<<<<<< HEAD
 >>>>>>> 3a1c4f5 (Creación de proyecto, autenticacion y vista de pistas)
+=======
+>>>>>>> 3a1c4f5cbc543359b3750dab8f06b0baeb72c17c
