@@ -1,5 +1,6 @@
 import './App.css'
 import AppRoutes from "./routes";
+import { Toaster } from "sonner"
 import Navbar from '@/components/Navbar';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
       <Navbar />
       <AppRoutes />
+      <Toaster position="top-right" richColors/>
     </>
   )
 }

@@ -2,11 +2,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { usePistas } from '@/hooks/usePistas';
 import { VerHorariosButton } from '@/components/VerHorariosButton';
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PistasView() {
   const { pistas, loading, error } = usePistas();
 
-  if (loading) return <div>Cargando pistas...</div>;
+  if (loading) return (
+    <div className="grid grid-cols-2 gap-4 m-8">
+    {[...Array(12)].map((_, i) => (
+      <div key={i} className="space-y-2">
+        <Skeleton className="h-20 rounded-md" />
+        <Skeleton className="h-6 rounded-md" />
+      </div>
+    ))}
+  </div>
+  );
   if (error) return <div className="text-red-600">Error: {error}</div>;
 
   return (

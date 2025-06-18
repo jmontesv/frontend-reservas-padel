@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
 import { Button } from "@/components/ui/button"
 import { useCrearReserva } from '@/hooks/useCrearReserva'
-
+import { toast } from "sonner"
 import {
   Card,
   CardContent,
@@ -23,6 +23,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { addDays, isBefore, isAfter, startOfDay } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { useAuth } from '@/hooks/useAuth'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function HorariosView() {
   const { pistaId } = useParams<{ pistaId: string }>()
@@ -78,7 +79,16 @@ export default function HorariosView() {
         {/* Lista de horarios */}
         <ScrollArea className="h-[300px] w-[300px]">
           <div className="grid grid-cols-1 gap-4">
-            {loading && <p>Cargando horarios...</p>}
+            {loading && (
+              <div className="grid gap-4 m-8">
+                {[...Array(12)].map((_, i) => (
+                  <div key={i} className="space-y-2">
+                    <Skeleton className="h-20 rounded-md" />
+                    <Skeleton className="h-6 rounded-md" />
+                  </div>
+                ))}
+              </div>
+            )}
             {error && <p className="text-red-600">Error: {error}</p>}
 
             {horarios && horarios.length === 0 ? (
@@ -160,9 +170,11 @@ export default function HorariosView() {
 
                   setOpen(false);
                   setHoraSeleccionada(null);
-                  alert("Reserva creada correctamente ✅");
+                  toast.success("Reserva creada con éxito", {
+                    description: "Tu reserva ha sido registrada correctamente.",
+                  });
                 } catch (err) {
-                  alert("Error al crear la reserva ❌");
+                  toast("Error al crear la reserva ❌");
                 }
               }}
               disabled={loadingReserva}

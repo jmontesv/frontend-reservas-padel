@@ -1,4 +1,3 @@
-// src/hooks/useHorarios.ts
 import { useEffect, useState } from 'react';
 import { fetchHorariosDisponibles, type Horario } from '@/services/Horarios';
 

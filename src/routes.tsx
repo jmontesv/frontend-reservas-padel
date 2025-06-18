@@ -9,8 +9,6 @@ import HorariosView from "./pages/Horarios";
 export default function AppRoutes() {
   const { user, loading } = useAuth();
 
-  if (loading) return <p className="text-center mt-10">Cargando...</p>;
-
   return (
     <Routes>
       <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
