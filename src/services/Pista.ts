@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export interface Pista {
   id: string;
   nombre: string;
@@ -8,7 +10,7 @@ export interface Pista {
 }
 
 export async function fetchPistas(): Promise<Pista[]> {
-  const res = await fetch('http://localhost:5000/pistas'); 
+  const res = await fetch(`${API_URL}/pistas`); 
   if (!res.ok) {
     throw new Error('Error al obtener las pistas');
   }

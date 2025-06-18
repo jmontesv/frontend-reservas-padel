@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export interface Horario {
   id: string;
   hora: string;
@@ -6,7 +8,7 @@ export interface Horario {
 
 
 export async function fetchHorariosDisponibles(pistaId: string, fecha: string): Promise<Horario[]> {
-  const res = await fetch(`http://localhost:5000/pistas/${pistaId}/horarios_disponibles?fecha=${fecha}`);
+  const res = await fetch(`${API_URL}/pistas/${pistaId}/horarios_disponibles?fecha=${fecha}`);
   const data = await res.json();
 
   if (!res.ok) {

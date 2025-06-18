@@ -1,4 +1,5 @@
 import { getAuth } from "firebase/auth"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function crearReserva({
   pistaId,
@@ -17,7 +18,7 @@ export async function crearReserva({
   if (!user) throw new Error("Usuario no autenticado");
 
   const token = await user.getIdToken(true);
-  const res = await fetch(`http://localhost:5000/reservas`, {
+  const res = await fetch(`${API_URL}/reservas`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
