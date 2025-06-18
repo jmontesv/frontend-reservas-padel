@@ -42,7 +42,7 @@ export default function HorariosView() {
     ? format(selectedDate, 'yyyy-MM-dd')
     : format(new Date(), 'yyyy-MM-dd')
 
-  const { horarios, loading, error } = useHorarios(pistaId!, fechaFormateada)
+  const { horarios, loading, error, refetch } = useHorarios(pistaId!, fechaFormateada)
 
   // Limitar selección del calendario
   const today = startOfDay(new Date())
@@ -173,7 +173,10 @@ export default function HorariosView() {
                   toast.success("Reserva creada con éxito", {
                     description: "Tu reserva ha sido registrada correctamente.",
                   });
+                  refetch();
                 } catch (err) {
+                  setHoraSeleccionada(null);
+                  setOpen(false);
                   toast("Error al crear la reserva ❌");
                 }
               }}
