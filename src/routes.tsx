@@ -5,9 +5,10 @@ import Home from "@/pages/Home";
 import { useAuth } from "./hooks/useAuth";
 import PistasView from "./pages/Pistas";
 import HorariosView from "./pages/Horarios";
+import ReservasView from "./pages/Reservas";
 
 export default function AppRoutes() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Routes>
@@ -16,6 +17,7 @@ export default function AppRoutes() {
       <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
       <Route path="/pistas" element={user ? <PistasView /> : <Navigate to="/login" />} />
       <Route path="/pistas/:pistaId/horarios" element={user ? <HorariosView /> : <Navigate to="/login" />} />
+      <Route path="/reservas" element={user ? <ReservasView /> : <Navigate to="/login" />} />
     </Routes>
   );
 }
