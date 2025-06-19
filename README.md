@@ -54,8 +54,8 @@ Una aplicación web para gestionar reservas de pistas de pádel, con autenticaci
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/reservas-padel.git
-cd reservas-padel
+git clone https://github.com/jmontesv/frontend-reservas-padel.git
+cd frontend-reservas-padel
 ```
 ### 2. Instalar dependencias e iniciar servidor de desarrollo
 
