@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { obtenerReservas, type Reserva } from '@/services/Reservas';
+import { obtenerReservas } from '@/services/Reservas';
 
 export function useReservas() {
   const [reservas, setReservas] = useState<any[]>([]);
