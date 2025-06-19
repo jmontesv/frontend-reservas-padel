@@ -29,25 +29,25 @@ Una aplicación web para gestionar reservas de pistas de pádel, con autenticaci
 ## 🖼️ Capturas de pantalla
 
 ### Página principal
-![Inicio](public/screenshots/home.png)
+![Inicio](public/screenshots/home.PNG)
 
 ### Pistas
-![Pistas](public/screenshots/pistas.png)
+![Pistas](public/screenshots/pistas.PNG)
 
 ### Login
-![Login](public/screenshots/login.png)
+![Login](public/screenshots/login.PNG)
 
 ### Horarios
-![Horarios](public/screenshots/horarios.png)
+![Horarios](public/screenshots/horarios.PNG)
 
 ### Reservas
-![Reservas](public/screenshots/reservas.png)
+![Reservas](public/screenshots/reservas.PNG)
 
 ### Reservar
-![Reservar](public/screenshots/reservar.png)
+![Reservar](public/screenshots/reservar.PNG)
 
 ### Confirmación reserva
-![Confirmacion](public/screenshots/modal.png)
+![Confirmacion](public/screenshots/modal.PNG)
 
 ## 📦 Instalación local
 
@@ -56,6 +56,13 @@ Una aplicación web para gestionar reservas de pistas de pádel, con autenticaci
 ```bash
 git clone https://github.com/tuusuario/reservas-padel.git
 cd reservas-padel
+```
+### 2. Instalar dependencias e iniciar servidor de desarrollo
+
+```bash
 npm install 
 npm run dev
+```
+
+
 
